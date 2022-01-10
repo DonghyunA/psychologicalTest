@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "${DB_USER_ID}"
+      POSTGRES_PASSWORD: "${DB_USER_PASSWORD}"
+      POSTGRES_DB: "${DB_USER_DBNAME}"
+      POSTGRES_INITDB_ARGS: '--encoding=UTF-8 --lc-collate=C --lc-ctype=C'
+    volumes:
+      - ${POSTGRES_HOME_DIR}/data/:/var/lib/postgresql/data
