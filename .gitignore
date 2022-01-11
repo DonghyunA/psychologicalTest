@@ -39,3 +39,4 @@ out/
 ### setting
 *.yaml
 *.env
+*.yml

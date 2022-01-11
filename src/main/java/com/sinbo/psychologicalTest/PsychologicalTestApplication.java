@@ -44,7 +44,7 @@ public class PsychologicalTestApplication {
 			// fetch customers by last name
 			log.info("Customer found with findByLastName('Bauer'):");
 			log.info("--------------------------------------------");
-			repository.findByUser("Bauer").forEach(bauer -> {
+			repository.findByUsr("Bauer").forEach(bauer -> {
 				log.info(bauer.toString());
 			});
 			// for (Customer bauer : repository.findByLastName("Bauer")) {

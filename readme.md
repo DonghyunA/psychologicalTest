@@ -5,3 +5,4 @@
 * postgresql
 * docker
 * lombok
+* DDD
