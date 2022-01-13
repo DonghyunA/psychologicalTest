@@ -1,10 +1,9 @@
 package com.sinbo.psychologicalTest.repo;
 
-import com.sinbo.psychologicalTest.entity.User;
+import com.sinbo.psychologicalTest.entity.user.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findByUsr(String user);

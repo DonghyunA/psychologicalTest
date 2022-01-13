@@ -1,6 +1,6 @@
 package com.sinbo.psychologicalTest;
 
-import com.sinbo.psychologicalTest.entity.User;
+import com.sinbo.psychologicalTest.entity.user.User;
 import com.sinbo.psychologicalTest.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
