@@ -3,8 +3,7 @@ package com.sinbo.psychologicalTest.service.security;
 import com.sinbo.psychologicalTest.entity.user.User;
 import com.sinbo.psychologicalTest.entity.user.UserRoleMapping;
 import com.sinbo.psychologicalTest.repo.UserRepository;
-import com.sinbo.psychologicalTest.service.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+  import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,14 +15,14 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService{
+public class PsyUserDetailsService implements UserDetailsService{
 
     @Autowired
-    private UserService userService;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(long userId) throws UsernameNotFoundException {
-        User user = userService.findbyId(userId);
+        User user = userRepository.findById(userId);
         return new User(user.getId(), user.getPwd(), getAuthorities(user));
     }
 
@@ -41,6 +40,11 @@ public class CustomUserDetailsService implements UserDetailsService{
             arrayOfStrings[index++] = userRoleMapping.getRoleId().getRole();
         }
         return arrayOfStrings;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
 
