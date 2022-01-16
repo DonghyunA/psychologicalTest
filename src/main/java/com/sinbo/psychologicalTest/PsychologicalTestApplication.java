@@ -20,11 +20,7 @@ public class PsychologicalTestApplication {
 	public CommandLineRunner demo(UserRepository repository) {
 		return (args) -> {
 			// save a few customers
-			repository.save(new User(1l,"Jack", "Bauer"));
-			repository.save(new User(2l,"Chloe", "O'Brian"));
-			repository.save(new User(3l,"Kim", "Bauer"));
-			repository.save(new User(4l,"David", "Palmer"));
-			repository.save(new User(5l,"Michelle", "Dessler"));
+
 
 			// fetch all customers
 			log.info("Customers found with findAll():");

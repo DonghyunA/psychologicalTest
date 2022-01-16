@@ -1,5 +1,6 @@
 package com.sinbo.psychologicalTest.service.security;
 
+import com.sinbo.psychologicalTest.dto.UserDTO;
 import com.sinbo.psychologicalTest.entity.user.User;
 import com.sinbo.psychologicalTest.entity.user.UserRoleMapping;
 import com.sinbo.psychologicalTest.repo.UserRepository;
@@ -21,9 +22,10 @@ public class PsyUserDetailsService implements UserDetailsService{
     UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(long userId) throws UsernameNotFoundException {
-        User user = userRepository.findById(userId);
-        return new User(user.getId(), user.getPwd(), getAuthorities(user));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User usr =  userRepository.findByEmail(email);
+        UserDTO userDTO = new UserDTO(usr.getEmail(), usr.getPwd());
+        return userDTO;
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(User user){
@@ -42,10 +44,6 @@ public class PsyUserDetailsService implements UserDetailsService{
         return arrayOfStrings;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
 }
 
 
