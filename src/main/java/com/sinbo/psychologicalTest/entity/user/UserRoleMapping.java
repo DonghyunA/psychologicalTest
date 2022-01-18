@@ -20,11 +20,11 @@ public class UserRoleMapping {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", referencedColumnName = "id")
-    private User userId;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="role_id", referencedColumnName = "id")
-    private Role roleId;
+    private Role role;
 
     @Column
     @CreationTimestamp

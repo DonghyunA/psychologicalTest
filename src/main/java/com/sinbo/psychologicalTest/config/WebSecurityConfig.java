@@ -19,31 +19,27 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
         jsr250Enabled = true,   //RolesAllowed
         prePostEnabled = true   //PreAuthorize, PostAuthorize
 )
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DaoAuthenticationProvider daoAuthenticationProvider;
-    private final PsyPasswordEncoder psyPasswordEncoder;
-    private final PsyUserDetailsService psyUserDetailsService;
-    public WebSecurityConfiguration(DaoAuthenticationProvider daoAuthenticationProvider, PsyPasswordEncoder psyPasswordEncoder, PsyUserDetailsService psyUserDetailsService) {
-        this.daoAuthenticationProvider = daoAuthenticationProvider;
-        this.psyPasswordEncoder = psyPasswordEncoder;
+    private PsyUserDetailsService psyUserDetailsService;
+    private PsyPasswordEncoder psyPasswordEncoder;
+
+    public WebSecurityConfig(PsyUserDetailsService psyUserDetailsService, PsyPasswordEncoder psyPasswordEncoder) {
         this.psyUserDetailsService = psyUserDetailsService;
+        this.psyPasswordEncoder = psyPasswordEncoder;
     }
-    @Bean public DaoAuthenticationProvider authenticationProvider() {
-        daoAuthenticationProvider.setPasswordEncoder(psyPasswordEncoder);
-        daoAuthenticationProvider.setUserDetailsService(psyUserDetailsService);
-        return daoAuthenticationProvider;
-    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
-        builder.authenticationProvider(authenticationProvider());
+        builder.userDetailsService(psyUserDetailsService)
+                .passwordEncoder(psyPasswordEncoder);
     }
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
 
 
